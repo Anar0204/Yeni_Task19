@@ -32,7 +32,7 @@ namespace ConsoleApp2
 
             List<Employee> employees2 = new List<Employee>();
 
-            DeSerializeEmployee();
+            employees2 = DeSerializeEmployee();
 
             Employee employee = employees2.FirstOrDefault(x =>x.Id ==id);
 
@@ -44,11 +44,25 @@ namespace ConsoleApp2
         {
             if(id ==null) throw new NullReferenceException();
 
-            Employees.RemoveAt(id);
+            List<Employee> employees = DeSerializeEmployee();
+
+            employees.Distinct();
+
+            employees.RemoveAt(id);
+
+            File.WriteAllText(path, "[]");
+
+            using FileStream fs = File.OpenWrite(path);
+
+
+            JsonSerializer.Serialize(fs, employees);
+
         }
         public static void SerializeEmployee( Employee employee)
         {
             List<Employee> employees = DeSerializeEmployee();
+
+            employees.Distinct();
 
             File.WriteAllText(path, "[]");
 
@@ -81,6 +95,8 @@ namespace ConsoleApp2
 
             return employees1;
         }
+
+
 
     }
 }

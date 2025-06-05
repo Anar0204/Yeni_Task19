@@ -44,9 +44,12 @@ do
 
             Employee employee1 = department.GetEmployeeById(id1);
 
-            Console.WriteLine($"Employee:{employee1}");
+            Console.WriteLine($"Employee:{employee1.Name}");
             break;
         case "3":
+            int id2 = Convert.ToInt32(Console.ReadLine());
+
+            department.RemoveEmployee(id2);
             break;
         case "0":
             check = true;
